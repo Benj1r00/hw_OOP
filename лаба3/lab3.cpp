@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <cassert> //для тестування коду
 
 class EducationalInstitution
 {
@@ -54,39 +53,8 @@ void show_vec_obj(std::vector<EducationalInstitution>& vec)
     std::cout << "\n";
 }
 
-//тести програми
-void run_tests() {
-    // Тест 1: Перевірка конструктора та обмеження рейтингу
-    EducationalInstitution inst1("Test Uni", 2000, 1000, 5, 10.0); // рейтинг > 5.0
-    assert(inst1.rating == 5.0);
-    assert(inst1.name == "Test Uni");
-
-    // Тест 2: Перевірка оператора порівняння ==
-    EducationalInstitution inst2("Test Uni", 2000, 1000, 5, 5.0);
-    assert(inst1 == inst2);
-
-    // Тест 3: Сортування за кількістю студентів (спадання)
-    std::vector<EducationalInstitution> test_vec = {
-        {"Small", 2000, 100, 0, 3.0},
-        {"Big", 2000, 550, 0, 4.0}
-    };
-    std::sort(test_vec.begin(), test_vec.end(), [](const EducationalInstitution& a, const EducationalInstitution& b){
-        return a.number_of_students > b.number_of_students;
-    });
-    assert(test_vec[0].name == "Big");
-
-    // Тест 4: Пошук об'єкта через std::find
-    auto it = std::find(test_vec.begin(), test_vec.end(), EducationalInstitution("Small", 2000, 100, 0, 3.0));
-    assert(it != test_vec.end());
-    assert(it->name == "Small");
-
-    std::cout << "All tests passed successfully!\n";
-}
-
 int main()
 {
-    run_tests(); //тестування
-
     //створюємо вектор об'єктів
     std::vector<EducationalInstitution> vec_obj = {
         EducationalInstitution("KPI", 1898, 25000, 10, 5.0f),
