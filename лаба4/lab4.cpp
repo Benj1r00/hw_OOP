@@ -163,8 +163,7 @@ public:
     {
         try
         {
-
-            std::string Imput_text = "Apple  \norange elephant                 umbrella popka ice avocado eye.";
+            std::string Imput_text = "Apple orange elephant umbrella popka ice avocado eye.";
             if(Imput_text.empty())
             {
                 throw std::runtime_error("the text is empty");
