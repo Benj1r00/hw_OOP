@@ -16,7 +16,7 @@ public:
     // конструктор класу з перевіркою параметрів
     Flower(std::string n, double p, int f, double s)
     : name(n), price(p), freshness(f), stemLength(s){
-        if (f < 1 || f > 10 || p < 0 || s < 0)
+        if (f < 1 || f > 10 || p < 0 || s < 0) // перевірка на логічність параметрів
         {
             throw std::invalid_argument("Incorrect flower parameters");
         }
@@ -61,10 +61,10 @@ public:
 
 class Bouquet
 {
-private:
+public:
     std::vector<std::unique_ptr<Flower>> flowers;
     double accessoryPrice = 0;
-public:
+
     // додвання аксесуарів
     void addAccessory(double price)
     {
@@ -132,14 +132,15 @@ public:
     }
 };
 
+#ifndef TESTING 
 int main()
 {
     try
     {
         Bouquet bouquet;
     
-        // додавання квітів
-        bouquet.addFlower(std::make_unique<Rose>(150.0, 10, 60.5));
+        // додавання квітів до букета
+        bouquet.addFlower(std::make_unique<Rose>(150.0, 10, 60.5)); 
         bouquet.addFlower(std::make_unique<Tulip>(80.0, 7, 40.0));
         bouquet.addFlower(std::make_unique<Lily>(120.0, 9, 50.0));
 
@@ -160,3 +161,4 @@ int main()
     
     return 0;
 }
+#endif

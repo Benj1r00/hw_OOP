@@ -7,7 +7,7 @@ class Letter
 {
 public:
     char value;
-    Letter(char c) {value = c;}
+    Letter(char c) {value = c;} // конструктор класу
 };
 
 class Word
@@ -16,8 +16,8 @@ public:
     std::vector<Letter> letters;
     void add_letter(char c) 
     {
-        Letter newLetter(c);      // 1. Створюємо об'єкт явно
-        letters.push_back(newLetter); // 2. Кладемо його у вектор
+        Letter newLetter(c);      // створюємо об'єкт
+        letters.push_back(newLetter); // кладемо його у вектор
     }
 
     std::string toString() const //повернення слова як звичайного string
@@ -35,14 +35,14 @@ public:
         return vowels.find(c) != std::string::npos;
     }
 
-    char getSortChar() const
+    char getSortChar() const // гетер для отримання другої літери
     {
         if (letters.size() < 2) return '\0';
         return letters[1].value;
     }
 };
 
-
+// структура для заповнення речення словами та символами
 struct SentenceElem
 {
     bool isWord;
@@ -57,26 +57,27 @@ class Sentence
 {
 public:
     std::vector<SentenceElem> elements;
-    void add(SentenceElem e) {elements.push_back(e);}
+    void add(SentenceElem e) {elements.push_back(e);} // додавання слова або символу до речення
 };
 
 class Text
 {
 public:
     std::vector<Sentence> sentences;
-    void add(const Sentence s) {sentences.push_back(s);}
+    void add(const Sentence s) {sentences.push_back(s);} // додавання речення до тексту
 };
 
-class TextProcessor
+class ObjectTextProcessor
 {
-private:
+public:
+    // нормалізація пробілів у тексті
    std::string normalization_of_spaces(const std::string& str)
    {
         std::string result;
         bool flagSpace = false;
         for (size_t i = 0; i < str.size(); i++)
         {
-            if (std::isspace(str[i])) 
+            if (std::isspace(str[i])) // якщо поточний символ є пробілом
             {
                 if (!flagSpace)
                 {
@@ -93,6 +94,7 @@ private:
         return result;
     }
 
+    // перевірка чи є символ літерою
     bool letter_or_not(char c)
     {
         std::string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -104,12 +106,12 @@ private:
         return result;
     }
 
-    Text restructuring(std::string str)
+    Text restructuring(std::string str) // розділення текст -> речення -> слова та символи
     {
         Text result;
         Sentence currentSent;
         Word currentWord;
-        std::string endSymbols = "!?.";
+        std::string endSymbols = "!?."; 
         for (size_t i = 0; i < str.size(); i++)
         {
             if (letter_or_not(str[i]))
@@ -118,7 +120,7 @@ private:
             }
             else 
             {
-                if (!currentWord.letters.empty())
+                if (!currentWord.letters.empty()) // якщо поточне слово не пусте, додаємо його до речення та очищуємо для наступного слова
                 {
                     currentSent.add(SentenceElem(currentWord));
                     currentWord = Word();
@@ -127,7 +129,7 @@ private:
                 {
                     continue;
                 }
-                if (endSymbols.find(str[i]) != std::string::npos)
+                if (endSymbols.find(str[i]) != std::string::npos) // перевірка на знак кінця речення
                 {
                     currentSent.add(SentenceElem(str[i]));
                     result.add(currentSent);
@@ -135,13 +137,14 @@ private:
                 }
                 else 
                 {
-                    currentSent.add(SentenceElem(str[i]));
+                    currentSent.add(SentenceElem(str[i])); // звичайний символ просто додаємо до речення
                 }
             }
         }
         return result;
     }
 
+    // сортування слів (бульбашковим сортуванням)
     void sort_sec_let(std::vector<Word>& vec_word)
     {
         for (size_t i = 0; i < vec_word.size(); i++)
@@ -157,20 +160,21 @@ private:
             }  
         }  
     }
-public:
-    void result()
+
+    void result() // головна функція для виконання завдання
     {
         try
         {
             std::string Imput_text = "Apple orange elephant umbrella popka ice avocado eye.";
-            if(Imput_text.empty())
+            if(Imput_text.empty()) // перевірка на порожній текст
             {
                 throw std::runtime_error("the text is empty");
             }
             
+            // створюємо об'єкт тексту, вже з нормалізованого(без зайвих пробілів та табуляцій) речення
             Text myText = restructuring(normalization_of_spaces(Imput_text));
             
-            std::vector<Word> vec;
+            std::vector<Word> vec;  // вектор для збереження слів, які починаються на голосну літеру
             for (size_t i = 0; i < myText.sentences.size(); i++) 
             {
                 Sentence& s = myText.sentences[i];
@@ -184,9 +188,9 @@ public:
                 }
             }
 
-            sort_sec_let(vec);
+            sort_sec_let(vec); // сортування
 
-            for (size_t i = 0; i < vec.size(); i++)
+            for (size_t i = 0; i < vec.size(); i++) // вивід слів вже через звичайний string
             {
                 std::cout << vec[i].toString() << '\n';
             }
@@ -198,9 +202,11 @@ public:
     }
 };
 
+#ifndef TESTING
 int main()
 {
-    TextProcessor text;
+    ObjectTextProcessor text;
     text.result();
     return 0;
 }
+#endif

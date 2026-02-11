@@ -3,10 +3,11 @@
 
 class Matrix
 {
-private:
+public:
+    // множення двох матриць
     std::vector<std::vector<float>> multiplication(const std::vector<std::vector<float>>& A, const std::vector<std::vector<float>>& B)
     {
-        if (A.empty() || B.empty() || A[0].size() != B.size())
+        if (A.empty() || B.empty() || A[0].size() != B.size()) // перевірка на можливість множення матриць
         {
             throw std::invalid_argument("incorrect data entry");
         }
@@ -15,7 +16,7 @@ private:
         size_t inner = B.size();
         size_t cols = B[0].size();
 
-        std::vector<std::vector<float>> C (rows, std::vector<float>(cols, 0.0f));
+        std::vector<std::vector<float>> C (rows, std::vector<float>(cols, 0.0f)); // створення матриці результату з початковими значеннями 0
 
         for (size_t i = 0; i < rows; i++)
         {
@@ -30,9 +31,10 @@ private:
         return C;
     }
 
+    // знаходження суми найменших елементів кожного стовпця
     float sums_of_the_smallest_elements_of_rows(const std::vector<std::vector<float>>& A)
     {
-        if (A.empty() || A[0].empty())
+        if (A.empty() || A[0].empty()) // перевірка на порожню матрицю
         {
             throw std::invalid_argument("matrix is empty");
         }
@@ -56,6 +58,7 @@ private:
         return sum;
     }
 
+    // вивід матриці
     void show_martixs(const std::vector<std::vector<float>>& A)
     {
         size_t rows = A.size();
@@ -71,8 +74,8 @@ private:
         }
         std::cout << "\n";
     }
-public:
-    void result()
+
+    void result() // головна функція для виконання завдання
     {
         try
         {
@@ -106,10 +109,11 @@ public:
     }
 };
 
+#ifndef TESTING
 int main()
 {
     Matrix test;
     test.result();
-
     return 0;
 }
+#endif

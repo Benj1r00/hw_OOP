@@ -53,6 +53,7 @@ void show_vec_obj(std::vector<EducationalInstitution>& vec)
     std::cout << "\n";
 }
 
+#ifndef TESTING
 int main()
 {
     //створюємо вектор об'єктів
@@ -98,3 +99,4 @@ int main()
     }
     return 0;
 }
+#endif
