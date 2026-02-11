@@ -22,9 +22,6 @@ public:
         }
     }
 
-    // деструктор
-    virtual ~Flower() {}
-
     // гетери для надання інформації класа
     std::string get_name() const {return name;}
     double get_price() const {return price;}
