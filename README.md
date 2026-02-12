@@ -1,24 +1,16 @@
-# Example headings
 
-## Sample Section
 
-## This'll be a _Helpful_ Section About the Greek Letter Θ!
-A heading containing characters not allowed in fragments, UTF-8 characters, two consecutive spaces between the first and second words, and formatting.
+## Лабораторна №1
 
-## This heading is not unique in the file
+Створити клас, який складається з виконавчого методу, що виконує дію з матрицею(ями)
+C = A * B із зазначеним типом елементів float та дію із результуючою матрицею С(обчислити
+суму найменших елементів з кожного стовпця матриці). Вивести на екран результати першої 
+та другої дій. Необхідно обробити всі виключні ситуації, що можуть виникнути під час 
+виконання програмного коду.
 
-TEXT 1
+## Лабораторна №2
 
-## This heading is not unique in the file
-
-TEXT 2
-
-# Links to the example headings above
-
-Link to the sample section: [Link Text](#sample-section).
-
-Link to the helpful section: [Link Text](#thisll-be-a-helpful-section-about-the-greek-letter-Θ).
-
-Link to the first non-unique section: [Link Text](#this-heading-is-not-unique-in-the-file).
-
-Link to the second non-unique section: [Link Text](#this-heading-is-not-unique-in-the-file-1).
+Створити клас, який складається з виконавчого методу, що виконує дію з текстовим рядком 
+відсортувати слова заданого тексту що починаються з голосних, за другою літерою* використовуючи 
+для цього тип даних згідно варіанту StringBuilder. Необхідно обробити всі виключні ситуації, що 
+можуть виникнути під час виконання програмного коду.
